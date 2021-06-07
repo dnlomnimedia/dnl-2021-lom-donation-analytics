@@ -1,0 +1,94 @@
+<!-- Google Tag Manager -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  // Be sure your organization is allowed to track the user data
+  [[?xx::x[[S1:cons_id]]x::::
+    dataLayer.push({ 'userId': '[[S1:cons_id]]' });
+  ]]
+</script>
+[[?x9x::x[[S4]]x::
+  [[?[[A14]]::/completed::
+    <!-- Luminate Donation Transaction Tracking -->
+    <script type="text/javascript" id="analytics--ecommerce-variables">
+      /**
+       * Set all Luminate properties as JavaScript variables, for ease of reading
+       * and using in various tags below.
+       */
+      var analyticsAffiliation = '[[T6:[[S0:SITE_NAME]]]]';
+      var analyticsBrand = '[[T6:[[S120:dc:campaignName]]]]';
+      var analyticsCategory = '[[T6:Donation]]';
+      var analyticsCurrency = '[[S72:currency_code]]';
+      var analyticsPaymentMethod = '[[?x[[S334:extproc]]x::xx::[[S120:dc:creditCardType]]::[[S334:extproc]]]]';
+      var analyticsProductName = 'Donation [[S334:df_id]]: [[T6:[[S120:dc:donationFormName]]]] [[?x1046x::x[[S4]]x:: Preview::]]';
+      var analyticsProductPrice = [[E130:[[S120:dc:giftAmount]] number]];
+      var analyticsRevenue = [[E130:[[S120:dc:taxDeductibleValue]] number]];
+      var analyticsProductSku = 'donation-[[?xmonthsxquartersxyearsx::x[[S120:dc:recurringFrequencyUnit]]x::[[E130:"[[S120:dc:recurringFrequencyUnit]]" "s" "ly" replaceall]]::one-time]]-[[S334:df_id]][[?x1046x::x[[S4]]x::-preview::]]';
+      var analyticsShipping = [[?xx::x[[S120:dc:shippingCharge]]x::'0'::[[E130:[[S120:dc:shippingCharge]] number]]]];
+      var analyticsTransactionId = '[[S120:dc:trackingCode]]';
+      var analyticsTax = '0';
+
+      dataLayer.push({
+        'event': 'transactionComplete',
+        'ecommerce': {
+          'currencyCode': analyticsCurrency,
+          'purchase': {
+            'actionField': {
+              'id': analyticsTransactionId,
+              'affiliation': analyticsAffiliation,
+              'revenue': analyticsRevenue,
+              'tax': analyticsTax,
+              'shipping': analyticsShipping,
+            },
+            'products': [{
+              'name': analyticsProductName,
+              'id': analyticsProductSku,
+              'price': analyticsProductPrice,
+              'category': analyticsCategory,
+              'brand': analyticsBrand,
+              'quantity': 1,
+            }]
+          }
+        },
+      });
+
+    </script>
+  ::
+    <!-- Check for donation transaction errors -->
+    <script type="text/javascript" id="analytics--ecommerce-variables">
+      document.addEventListener("DOMContentLoaded", function(event) {
+        var analyticsScripts = document.getElementById('analytics--ecommerce-variables');
+        var analyticsScriptsExecuted = analyticsScripts.getAttribute('data-analytics-executed');
+        var donationErrors = document.querySelectorAll('.field-error-text');
+        var errorEventCategory = 'Errors';
+        var errorEventAction = 'error';
+        var errorEventLabel = '';
+        var errorEventValue = donationErrors.length; // number of errors no the page
+
+        if (donationErrors.length > 0 && analyticsScriptsExecuted === null) {
+          for (i = 0; i < donationErrors.length; i++) {
+            errorEventLabel += ' ' + donationErrors[i].innerText;
+          }
+
+          /**
+           * Track the error with Google Tag Manager
+           */
+          dataLayer.push({
+            'event': 'error',
+            'gtm.errorMessage': errorEventLabel,
+            'numberOfErrors': errorEventValue
+          });
+          analyticsScripts.setAttribute('data-analytics-executed', 'true');
+        }
+      });
+    </script>
+  ]]
+::]]
+
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-XXXXXXX ');
+</script>
+<!-- End Google Tag Manager -->
