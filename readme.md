@@ -19,4 +19,4 @@ Feel free to adapt this code to your needs. DNL Omnimedia, Inc. does not provide
 10. Configure `userId` as a custom dimension in Google Analytics and configure GTM to send data to that custom dimension for more detailed reporting and data reconciliation with Luminate Online
 
 ## How to Get Help
-If you run into issues with this code or implement analytics in other Blackbaud Luminate Online module. [Contact DNL Omnimedia](https://www.dnlomnimedia.com/contact/?utm_source=github&utm_medium=web&utm_campaign=bbdevconference)
+If you run into issues with this code or need assistance implementing analytics in other Blackbaud Luminate Online module. [Contact DNL Omnimedia](https://www.dnlomnimedia.com/contact/?utm_source=github&utm_medium=web&utm_campaign=bbdevconference)
